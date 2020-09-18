@@ -15,6 +15,8 @@ frontmatter = text.scan(frontmatter_regex).first
 body = text.sub(frontmatter, "")
 body.gsub!("<!--more-->", "")
 
+body.gsub!('<span style="font-style:italic;">', '<i>').gsub!('</span>','</i>')
+
 paragraph_marker = "<!--p-->"
 body.gsub!(/\n\n/, paragraph_marker)
 markdown_body = Kramdown::Document.new(body, input: 'html').to_kramdown
